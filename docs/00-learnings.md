@@ -4,6 +4,23 @@ While executing Kelsey's tutorial, I needed to search the Internet for basics, a
 
 ## Repository
 
+Kelsey's repository no longer has the `encryption-config.yaml` file, surely due to modern security practices and code scanning warnings from GitHub. Here's how to make it after you export the variable:
+```bash
+cat > encryption-config.yaml <<EOF
+apiVersion: apiserver.config.k8s.io/v1
+kind: EncryptionConfiguration
+resources:
+  - resources:
+      - secrets
+    providers:
+      - aescbc:
+          keys:
+            - name: key1
+              secret: ${ENCRYPTION_KEY}
+      - identity: {}
+EOF
+```
+
 ## Hardware
 
 ## Client Operating System
@@ -22,6 +39,20 @@ lsb_release -a
 Check the CPU architecture:
 ```bash
 uname -mov
+```
+
+### API Server Firewall
+
+Allow port 6443 for nodes to talk to API server:
+```bash
+sudo ufw allow 6443/tcp
+```
+
+### Work Node Troubleshooting
+
+If you have issues with the kublet process on a worker node, check out the log:
+```bash
+sudo systemctl status kubelet
 ```
 
 ### CPU Architecture
