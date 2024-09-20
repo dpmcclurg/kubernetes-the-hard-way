@@ -98,7 +98,7 @@ Install the worker binaries:
   tar -xvf crictl-v1.28.0-linux-amd64.tar.gz
   tar -xvf containerd-1.7.8-linux-amd64.tar.gz -C containerd
   tar -xvf cni-plugins-linux-amd64-v1.3.0.tgz -C /opt/cni/bin/
-  mv runc.arm64 runc
+  mv runc.amd64 runc
   chmod +x crictl kubectl kube-proxy kubelet runc 
   mv crictl kubectl kube-proxy kubelet runc /usr/local/bin/
   mv containerd/bin/* /bin/
